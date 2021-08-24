@@ -318,6 +318,9 @@
                         (with-out-str (println "Error processing request!")
                           (println "Exception:\n")
                           (stacktrace/print-cause-trace exception)
+                          (when-let [data (ex-data exception)]
+                            (println "\nEx-data:\n")
+                            (pprint/pprint data))
                           (println "\nContext:\n")
                           (pprint/pprint context)))
                        (ring-response/status 500))))
